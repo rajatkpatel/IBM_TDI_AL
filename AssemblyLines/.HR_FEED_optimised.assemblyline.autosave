@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><MetamergeConfig Cycle="1" UUID="2acd19b6-e16a-486e-a528-0bc4603e6091" created="Tue May 28 15:41:58 IST 2019" createdBy="GS-1837" main="HR_FEED_optimised" modified="Tue May 28 15:41:58 IST 2019" modifiedBy="GS-1837" project="HR_FEED" version="7.1.1">
+<?xml version="1.0" encoding="UTF-8"?><MetamergeConfig Cycle="1" UUID="929311bb-3b8d-4052-b9ad-e30fc49b4536" created="Tue May 28 15:46:58 IST 2019" createdBy="GS-1837" main="HR_FEED_optimised" modified="Tue May 28 15:46:58 IST 2019" modifiedBy="GS-1837" project="HR_FEED" version="7.1.1">
     <AssemblyLine name="HR_FEED_optimised">
         <ModTime>1559038019208</ModTime>
         <Settings/>

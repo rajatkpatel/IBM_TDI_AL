@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><MetamergeConfig Cycle="136" UUID="66b29df2-b2ab-4c5c-93dd-8d74e2211b77" created="Fri May 24 08:47:30 IST 2019" createdBy="GS-1837" main="HR_FEED" modified="Tue May 28 14:51:49 IST 2019" modifiedBy="GS-1837" project="HR_FEED" version="7.1.1">
+<?xml version="1.0" encoding="UTF-8"?><MetamergeConfig Cycle="138" UUID="66b29df2-b2ab-4c5c-93dd-8d74e2211b77" created="Fri May 24 08:47:30 IST 2019" createdBy="GS-1837" main="HR_FEED" modified="Tue May 28 16:23:21 IST 2019" modifiedBy="GS-1837" project="HR_FEED" version="7.1.1">
     <AssemblyLine name="HR_FEED">
-        <ModTime>1559035309871</ModTime>
+        <ModTime>1559040739007</ModTime>
         <Settings/>
         <Hooks>
             <Hook name="onsuccess">
@@ -73,15 +73,14 @@ function EmailValidator(emailId){
         </SimulationConfig>
         <LogConfig/>
         <ContainerEF name="EntryFeedContainer">
-            <ModTime>1559035309871</ModTime>
+            <ModTime>1559040739007</ModTime>
             <Connector name="Read_From_MYSQL_Employees_HR">
                 <InheritFrom>system:/Connectors/ibmdi.JDBC</InheritFrom>
-                <ModTime>1559035309871</ModTime>
+                <ModTime>1559040739007</ModTime>
                 <ConnectorMode>Iterator</ConnectorMode>
                 <ConnectorState>Enabled</ConnectorState>
                 <Configuration>
                     <InheritFrom>[parent]</InheritFrom>
-                    <ModTime>1559035244906</ModTime>
                     <parameter name="jdbcCustomPreparedStatements">false</parameter>
                     <parameter name="jdbcDriver">com.mysql.jdbc.Driver</parameter>
                     <parameter name="jdbcLogin">root</parameter>
@@ -192,14 +191,12 @@ function EmailValidator(emailId){
                 </LinkCriteria>
                 <Hooks>
                     <InheritFrom>[parent]</InheritFrom>
-                    <ModTime>1559035309871</ModTime>
+                    <ModTime>1559040739007</ModTime>
                     <Hook name="get_ok">
                         <InheritFrom>[no inheritance]</InheritFrom>
-                        <ModTime>1559035309871</ModTime>
+                        <ModTime>1559040739007</ModTime>
                         <Name>get_ok</Name>
-                        <Script><![CDATA[var isValidFlag = true;
-
-//Email Validation
+                        <Script><![CDATA[//Email Validation
 var isInputValid_Email = InputValidator("email_id",work.getStringValue("email_id"));
 if(!isInputValid_Email){
 	MISSING_ATTR += "email_id ";
@@ -251,7 +248,6 @@ MISSING_ATTR = "";]]></Script>
             </Connector>
         </ContainerEF>
         <ContainerDF name="DataFlowContainer">
-            <ModTime>1559035016325</ModTime>
             <Branch name="IF_Data_Valid">
                 <ModTime>1559031539367</ModTime>
                 <Connector name="Write_Valid_Records_CSV">

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><MetamergeConfig IDIversion="Created by TDI7.1.1 - 2012-04-23" created="Fri May 24 08:45:39 IST 2019" createdBy="GS-1837" modified="Tue May 28 17:14:19 IST 2019" modifiedBy="GS-1837" version="7.1.1">
+<?xml version="1.0" encoding="UTF-8"?><MetamergeConfig IDIversion="Created by TDI7.1.1 - 2012-04-23" created="Tue May 28 17:15:22 IST 2019" createdBy="GS-1837" modified="Tue May 28 17:15:22 IST 2019" modifiedBy="GS-1837" version="7.1.1">
     <Folder name="AssemblyLines">
         <AssemblyLine name="HR_FEED">
             <ModTime>1559040739007</ModTime>
@@ -74,7 +74,6 @@ function EmailValidator(emailId){
             </SimulationConfig>
             <LogConfig/>
             <ContainerEF name="EntryFeedContainer">
-                <ModTime>1559040739007</ModTime>
                 <Connector name="Read_From_MYSQL_Employees_HR">
                     <InheritFrom>system:/Connectors/ibmdi.JDBC</InheritFrom>
                     <ModTime>1559040739007</ModTime>
@@ -192,7 +191,6 @@ function EmailValidator(emailId){
                     </LinkCriteria>
                     <Hooks>
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559040739007</ModTime>
                         <Hook name="get_ok">
                             <InheritFrom>[no inheritance]</InheritFrom>
                             <Name>get_ok</Name>
@@ -542,7 +540,7 @@ return false;]]></ScriptCondition>
                 <Schema name="AssemblyLineInitParams"/>
             </InitParams>
         </AssemblyLine>
-    <AssemblyLine name="My_HR_FEED">
+        <AssemblyLine name="My_HR_FEED">
             <ModTime>1559037863954</ModTime>
             <Settings/>
             <Hooks>
@@ -614,7 +612,6 @@ function EmailValidator(emailId){
             </SimulationConfig>
             <LogConfig/>
             <ContainerEF name="EntryFeedContainer">
-                <ModTime>1559037863954</ModTime>
                 <Connector name="Read_From_MYSQL_Employees_HR">
                     <InheritFrom>system:/Connectors/ibmdi.JDBC</InheritFrom>
                     <ModTime>1559037863954</ModTime>
@@ -622,7 +619,6 @@ function EmailValidator(emailId){
                     <ConnectorState>Enabled</ConnectorState>
                     <Configuration>
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037523439</ModTime>
                         <parameter name="debug">true</parameter>
                         <parameter name="jdbcCustomPreparedStatements">false</parameter>
                         <parameter name="jdbcDriver">com.mysql.jdbc.Driver</parameter>
@@ -734,7 +730,6 @@ function EmailValidator(emailId){
                     </LinkCriteria>
                     <Hooks>
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037863954</ModTime>
                         <Hook name="get_ok">
                             <InheritFrom>[no inheritance]</InheritFrom>
                             <Name>get_ok</Name>
@@ -792,13 +787,11 @@ MISSING_ATTR = "";]]></Script>
                 </Connector>
             </ContainerEF>
             <ContainerDF name="DataFlowContainer">
-                <ModTime>1559037843071</ModTime>
                 <ALMap name="AttributeMap">
                     <InheritFrom>[no inheritance]</InheritFrom>
                     <ModTime>1559037581051</ModTime>
                     <AttributeMap name="Input">
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037505080</ModTime>
                         <AttributeMapItem>
                             <Name>MISSING</Name>
                             <Type>advanced</Type>
@@ -836,30 +829,24 @@ else{
                     <ConnectorState>Passive</ConnectorState>
                     <Configuration>
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037740696</ModTime>
                         <parameter name="fileAppend">true</parameter>
                     </Configuration>
                     <Parser>
                         <InheritFrom>system:/Parsers/ibmdi.JSONParser</InheritFrom>
-                        <ModTime>1559037515944</ModTime>
                         <parameter name="compact">false</parameter>
                         <parameter name="debug">true</parameter>
                         <Schema name="Input">
                             <InheritFrom>[parent]</InheritFrom>
-                            <ModTime>1559037067318</ModTime>
                         </Schema>
                         <Schema name="Output">
                             <InheritFrom>[parent]</InheritFrom>
-                            <ModTime>1559037067318</ModTime>
                         </Schema>
                     </Parser>
                     <AttributeMap name="Input">
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037067318</ModTime>
                     </AttributeMap>
                     <AttributeMap name="Output">
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037461185</ModTime>
                         <AttributeMapItem>
                             <Name>*</Name>
                             <Type>simple</Type>
@@ -869,19 +856,15 @@ else{
                     <DeltaSettings/>
                     <Schema name="Input">
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037067318</ModTime>
                     </Schema>
                     <Schema name="Output">
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037067318</ModTime>
                     </Schema>
                     <LinkCriteria>
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037067318</ModTime>
                     </LinkCriteria>
                     <Hooks>
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037067318</ModTime>
                     </Hooks>
                     <CheckpointConfig/>
                     <SandboxConfig/>
@@ -973,7 +956,6 @@ function EmailValidator(emailId){
             </SimulationConfig>
             <LogConfig/>
             <ContainerEF name="EntryFeedContainer">
-                <ModTime>1559037863954</ModTime>
                 <Connector name="Read_From_MYSQL_Employees_HR">
                     <InheritFrom>system:/Connectors/ibmdi.JDBC</InheritFrom>
                     <ModTime>1559037863954</ModTime>
@@ -981,7 +963,6 @@ function EmailValidator(emailId){
                     <ConnectorState>Enabled</ConnectorState>
                     <Configuration>
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037523439</ModTime>
                         <parameter name="debug">true</parameter>
                         <parameter name="jdbcCustomPreparedStatements">false</parameter>
                         <parameter name="jdbcDriver">com.mysql.jdbc.Driver</parameter>
@@ -1093,7 +1074,6 @@ function EmailValidator(emailId){
                     </LinkCriteria>
                     <Hooks>
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037863954</ModTime>
                         <Hook name="get_ok">
                             <InheritFrom>[no inheritance]</InheritFrom>
                             <Name>get_ok</Name>
@@ -1151,7 +1131,6 @@ MISSING_ATTR = "";]]></Script>
                 </Connector>
             </ContainerEF>
             <ContainerDF name="DataFlowContainer">
-                <ModTime>1559038019208</ModTime>
                 <Connector name="FileConnector">
                     <InheritFrom>system:/Connectors/ibmdi.FileSystem</InheritFrom>
                     <ModTime>1559037740696</ModTime>
@@ -1159,30 +1138,24 @@ MISSING_ATTR = "";]]></Script>
                     <ConnectorState>Passive</ConnectorState>
                     <Configuration>
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037740696</ModTime>
                         <parameter name="fileAppend">true</parameter>
                     </Configuration>
                     <Parser>
                         <InheritFrom>system:/Parsers/ibmdi.JSONParser</InheritFrom>
-                        <ModTime>1559037515944</ModTime>
                         <parameter name="compact">false</parameter>
                         <parameter name="debug">true</parameter>
                         <Schema name="Input">
                             <InheritFrom>[parent]</InheritFrom>
-                            <ModTime>1559037067318</ModTime>
                         </Schema>
                         <Schema name="Output">
                             <InheritFrom>[parent]</InheritFrom>
-                            <ModTime>1559037067318</ModTime>
                         </Schema>
                     </Parser>
                     <AttributeMap name="Input">
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037067318</ModTime>
                     </AttributeMap>
                     <AttributeMap name="Output">
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037461185</ModTime>
                         <AttributeMapItem>
                             <Name>*</Name>
                             <Type>simple</Type>
@@ -1192,19 +1165,15 @@ MISSING_ATTR = "";]]></Script>
                     <DeltaSettings/>
                     <Schema name="Input">
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037067318</ModTime>
                     </Schema>
                     <Schema name="Output">
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037067318</ModTime>
                     </Schema>
                     <LinkCriteria>
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037067318</ModTime>
                     </LinkCriteria>
                     <Hooks>
                         <InheritFrom>[parent]</InheritFrom>
-                        <ModTime>1559037067318</ModTime>
                     </Hooks>
                     <CheckpointConfig/>
                     <SandboxConfig/>
@@ -1241,6 +1210,7 @@ MISSING_ATTR = "";]]></Script>
         <TombstonesConfig name="Tombstones"/>
         <SolutionInterface name="SolutionInterface">
             <ModTime>1558667815312</ModTime>
+            <PollInterval>-1</PollInterval>
             <InstanceID>HR_FEED</InstanceID>
             <enabled>true</enabled>
         </SolutionInterface>
