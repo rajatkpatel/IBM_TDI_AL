@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?><MetamergeConfig Cycle="1" UUID="d03a355b-61f4-4526-8570-b02bdc5d4955" created="Tue May 28 15:41:47 IST 2019" createdBy="GS-1837" main="HR_FEED" modified="Tue May 28 15:41:47 IST 2019" modifiedBy="GS-1837" project="HR_FEED" version="7.1.1">
+    <AssemblyLine name="HR_FEED">
+        <ModTime>1559035309871</ModTime>
+        <Settings/>
+        <Hooks>
+            <Hook name="onsuccess">
+                <InheritFrom>[no inheritance]</InheritFrom>
+                <Name>onsuccess</Name>
+                <Script/>
+                <Enabled>false</Enabled>
+            </Hook>
+            <Hook name="prolog0">
+                <InheritFrom>[no inheritance]</InheritFrom>
+                <Name>prolog0</Name>
+                <Script><![CDATA[/*Global Variables*/
+
+var TOTAL_VALID_RECORDS = 0;
+var TOTAL_INVALID_RECORDS = 0;
+var MISSING_ATTR = "";
+var VALID_RECORD_LIST = [];
+var INVALID_RECORD_LIST = [];
+var valid_count = -1;
+var invalid_count = -1;
+
+
+function InputValidator(inputKey,inputValue){
+	if(inputValue == null || inputValue == ""){
+		return false;
+	}
+	else{
+		var isInputValid = true;
+		switch(inputKey){
+			case "email_id":
+				isInputValid = EmailValidator(inputValue)
+    			return isInputValid;
+				break;
+			case "department":
+				return true;
+				break;
+			case "L_Name":
+				return true;
+				break;
+			default:
+				task.logmsg("Key mismatched");
+				return true;
+		}
+	}
+}
+
+function EmailValidator(emailId){
+	var index_of_at = emailId.indexOf('@');
+	if(index_of_at == -1){
+        task.logmsg("Email address is not Valid");
+        return false;
+    }
+    return true;
+}]]></Script>
+                <Enabled>true</Enabled>
+            </Hook>
+        </Hooks>
+        <CheckpointConfig/>
+        <SandboxConfig/>
+        <SimulationConfig>
+            <SimulationStates>
+                <Component name="IF_Data_Valid" state="Enabled"/>
+                <Component name="Write_Valid_Records_CSV" state="Simulated"/>
+                <Component name="IF_Data_Invalid" state="Enabled"/>
+                <Component name="Write_Invalid_Records_CSV" state="Simulated"/>
+                <Component name="Passive_Write_Records_CSV" state="Simulated"/>
+                <Component name="Read_From_MYSQL_Employees_HR" state="Enabled"/>
+            </SimulationStates>
+            <ProxySettings/>
+        </SimulationConfig>
+        <LogConfig/>
+        <ContainerEF name="EntryFeedContainer">
+            <Connector name="Read_From_MYSQL_Employees_HR">
+                <InheritFrom>system:/Connectors/ibmdi.JDBC</InheritFrom>
+                <ModTime>1559035309871</ModTime>
+                <ConnectorMode>Iterator</ConnectorMode>
+                <ConnectorState>Enabled</ConnectorState>
+                <Configuration>
+                    <InheritFrom>[parent]</InheritFrom>
+                    <parameter name="jdbcCustomPreparedStatements">false</parameter>
+                    <parameter name="jdbcDriver">com.mysql.jdbc.Driver</parameter>
+                    <parameter name="jdbcLogin">root</parameter>
+                    <parameter name="jdbcPassword">Passw0rd789!</parameter>
+                    <parameter name="jdbcSchema">employees_hr</parameter>
+                    <parameter name="jdbcSource">jdbc:mysql://localhost:3306/employees_hr?useSSL=false&amp;allowPublicKeyRetrieval=true</parameter>
+                    <parameter name="jdbcTable">employee_details</parameter>
+                </Configuration>
+                <Parser>
+                    <InheritFrom>[parent]</InheritFrom>
+                    <Schema name="Input">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                    <Schema name="Output">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                </Parser>
+                <AttributeMap name="Input">
+                    <InheritFrom>[parent]</InheritFrom>
+                    <AttributeMapItem>
+                        <Name>F_Name</Name>
+                        <Type>simple</Type>
+                        <Simple>F_Name</Simple>
+                    </AttributeMapItem>
+                    <AttributeMapItem>
+                        <Name>L_Name</Name>
+                        <Type>simple</Type>
+                        <Simple>L_Name</Simple>
+                    </AttributeMapItem>
+                    <AttributeMapItem>
+                        <Name>department</Name>
+                        <Type>simple</Type>
+                        <Simple>department</Simple>
+                    </AttributeMapItem>
+                    <AttributeMapItem>
+                        <Name>email_id</Name>
+                        <Type>simple</Type>
+                        <Simple>email_id</Simple>
+                    </AttributeMapItem>
+                    <AttributeMapItem>
+                        <Name>emp_id</Name>
+                        <Type>simple</Type>
+                        <Simple>emp_id</Simple>
+                    </AttributeMapItem>
+                </AttributeMap>
+                <AttributeMap name="Output">
+                    <InheritFrom>[parent]</InheritFrom>
+                </AttributeMap>
+                <DeltaSettings>
+                    <UniqueAttribute/>
+                    <WhenToCommit>After every database operation</WhenToCommit>
+                    <RowLocking>SERIALIZABLE</RowLocking>
+                    <ChangeDetectionMode>DETECT_ALL</ChangeDetectionMode>
+                </DeltaSettings>
+                <Schema name="Input">
+                    <InheritFrom>[parent]</InheritFrom>
+                    <SchemaItem>
+                        <Name>F_Name</Name>
+                        <Syntax>java.lang.String</Syntax>
+                        <NativeSyntax>VARCHAR</NativeSyntax>
+                    </SchemaItem>
+                    <SchemaItem>
+                        <Name>L_Name</Name>
+                        <Syntax>java.lang.String</Syntax>
+                        <NativeSyntax>VARCHAR</NativeSyntax>
+                    </SchemaItem>
+                    <SchemaItem>
+                        <Name>department</Name>
+                        <Syntax>java.lang.String</Syntax>
+                        <NativeSyntax>VARCHAR</NativeSyntax>
+                    </SchemaItem>
+                    <SchemaItem>
+                        <Name>email_id</Name>
+                        <Syntax>java.lang.String</Syntax>
+                        <NativeSyntax>VARCHAR</NativeSyntax>
+                    </SchemaItem>
+                    <SchemaItem>
+                        <Name>emp_id</Name>
+                        <Syntax>java.lang.String</Syntax>
+                        <NativeSyntax>VARCHAR</NativeSyntax>
+                    </SchemaItem>
+                </Schema>
+                <Schema name="Output">
+                    <InheritFrom>[parent]</InheritFrom>
+                    <SchemaItem>
+                        <Name>F_Name</Name>
+                        <Syntax>java.lang.String</Syntax>
+                    </SchemaItem>
+                    <SchemaItem>
+                        <Name>L_Name</Name>
+                        <Syntax>java.lang.String</Syntax>
+                    </SchemaItem>
+                    <SchemaItem>
+                        <Name>department</Name>
+                        <Syntax>java.lang.String</Syntax>
+                    </SchemaItem>
+                    <SchemaItem>
+                        <Name>email_id</Name>
+                        <Syntax>java.lang.String</Syntax>
+                    </SchemaItem>
+                    <SchemaItem>
+                        <Name>emp_id</Name>
+                        <Syntax>java.lang.String</Syntax>
+                    </SchemaItem>
+                </Schema>
+                <LinkCriteria>
+                    <InheritFrom>[parent]</InheritFrom>
+                </LinkCriteria>
+                <Hooks>
+                    <InheritFrom>[parent]</InheritFrom>
+                    <Hook name="get_ok">
+                        <InheritFrom>[no inheritance]</InheritFrom>
+                        <Name>get_ok</Name>
+                        <Script><![CDATA[var isValidFlag = true;
+
+//Email Validation
+var isInputValid_Email = InputValidator("email_id",work.getStringValue("email_id"));
+if(!isInputValid_Email){
+	MISSING_ATTR += "email_id ";
+}
+
+//Department Validation
+var isInputValid_Department = InputValidator("department",work.getStringValue("department"));
+if(!isInputValid_Department){
+	MISSING_ATTR += "department ";
+}
+
+//LastName Validation
+var isInputValid_LastName = InputValidator("L_Name",work.getStringValue("L_Name"));
+if(!isInputValid_LastName){
+	MISSING_ATTR += "L_Name ";
+}
+
+work.setAttribute("MISSING",MISSING_ATTR);
+if(MISSING_ATTR.length == 0){
+	TOTAL_VALID_RECORDS++;
+	VALID_RECORD_LIST.push(work);
+	valid_count++;
+	//Passive_Write_Records_CSV.setConnectorParam("filePath","C:\\Users\\GS-1837\\Desktop\\TDI Data Source\\Passive_HRFeed_Valid_Records.csv");
+	//Passive_Write_Records_CSV.add(work);
+}
+else{
+	TOTAL_INVALID_RECORDS++;
+	//	task.logmsg("MISSING: "+MISSING_ATTR);
+	INVALID_RECORD_LIST.push(work);
+	invalid_count++;
+	Passive_Write_Records_CSV.setConnectorParam("filePath","C:\\Users\\GS-1837\\Desktop\\TDI Data Source\\Passive_HRFeed_Invalid_Records.csv");
+	Passive_Write_Records_CSV.add(work);
+}
+MISSING_ATTR = "";]]></Script>
+                        <Enabled>true</Enabled>
+                    </Hook>
+                </Hooks>
+                <CheckpointConfig/>
+                <SandboxConfig/>
+                <Reconnect>
+                    <InheritFrom>[parent]</InheritFrom>
+                    <ReconnectRules/>
+                </Reconnect>
+                <Operations/>
+                <PoolDefinition>
+                    <InheritFrom>[parent]</InheritFrom>
+                </PoolDefinition>
+                <PoolInstance/>
+            </Connector>
+        </ContainerEF>
+        <ContainerDF name="DataFlowContainer">
+            <Branch name="IF_Data_Valid">
+                <ModTime>1559031539367</ModTime>
+                <Connector name="Write_Valid_Records_CSV">
+                    <InheritFrom>system:/Connectors/ibmdi.FileSystem</InheritFrom>
+                    <ModTime>1559030122567</ModTime>
+                    <ConnectorMode>AddOnly</ConnectorMode>
+                    <ConnectorState>Enabled</ConnectorState>
+                    <Configuration>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <parameter name="filePath">C:\Users\GS-1837\Desktop\TDI Data Source\HRFeed_Valid_Records.csv</parameter>
+                    </Configuration>
+                    <Parser>
+                        <InheritFrom>system:/Parsers/ibmdi.CSV</InheritFrom>
+                        <parameter name="csvColumnSeparator">,</parameter>
+                        <parameter name="csvColumns">emp_id,F_Name,L_Name,department,email_id</parameter>
+                        <Schema name="Input">
+                            <InheritFrom>[parent]</InheritFrom>
+                        </Schema>
+                        <Schema name="Output">
+                            <InheritFrom>[parent]</InheritFrom>
+                        </Schema>
+                    </Parser>
+                    <AttributeMap name="Input">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </AttributeMap>
+                    <AttributeMap name="Output">
+                        <InheritFrom>[parent]</InheritFrom>
+                        <AttributeMapItem>
+                            <Name>F_Name</Name>
+                            <Type>advanced</Type>
+                            <Script>VALID_RECORD_LIST[valid_count]["F_Name"]</Script>
+                            <Simple>F_Name</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>L_Name</Name>
+                            <Type>advanced</Type>
+                            <Script>VALID_RECORD_LIST[valid_count]["L_Name"];</Script>
+                            <Simple>L_Name</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>department</Name>
+                            <Type>advanced</Type>
+                            <Script>VALID_RECORD_LIST[valid_count]["department"]</Script>
+                            <Simple>department</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>email_id</Name>
+                            <Type>advanced</Type>
+                            <Script>VALID_RECORD_LIST[valid_count]["email_id"];</Script>
+                            <Simple>email_id</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>emp_id</Name>
+                            <Type>advanced</Type>
+                            <Script>VALID_RECORD_LIST[valid_count]["emp_id"];</Script>
+                            <Simple>emp_id</Simple>
+                        </AttributeMapItem>
+                    </AttributeMap>
+                    <DeltaSettings/>
+                    <Schema name="Input">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                    <Schema name="Output">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                    <LinkCriteria>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </LinkCriteria>
+                    <Hooks>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Hooks>
+                    <CheckpointConfig/>
+                    <SandboxConfig/>
+                    <Reconnect>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <ReconnectRules/>
+                    </Reconnect>
+                    <Operations/>
+                    <PoolDefinition>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </PoolDefinition>
+                    <PoolInstance/>
+                </Connector>
+                <ScriptCondition><![CDATA[if(work.getStringValue("MISSING") == ""){
+	return true;
+}
+return false;]]></ScriptCondition>
+                <Conditions/>
+                <MatchAny>false</MatchAny>
+                <Enabled>true</Enabled>
+                <Type>0</Type>
+            </Branch>
+            <Branch name="IF_Data_Invalid">
+                <ModTime>1559031542135</ModTime>
+                <Connector name="Write_Invalid_Records_CSV">
+                    <InheritFrom>system:/Connectors/ibmdi.FileSystem</InheritFrom>
+                    <ModTime>1559030097646</ModTime>
+                    <ConnectorMode>AddOnly</ConnectorMode>
+                    <ConnectorState>Enabled</ConnectorState>
+                    <Configuration>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <parameter name="filePath">C:\Users\GS-1837\Desktop\TDI Data Source\HRFeed_Invalid_Records.csv</parameter>
+                    </Configuration>
+                    <Parser>
+                        <InheritFrom>system:/Parsers/ibmdi.CSV</InheritFrom>
+                        <parameter name="csvColumnSeparator">,</parameter>
+                        <parameter name="csvColumns">emp_id,F_Name,L_Name,department,email_id,MISSING</parameter>
+                        <Schema name="Input">
+                            <InheritFrom>[parent]</InheritFrom>
+                        </Schema>
+                        <Schema name="Output">
+                            <InheritFrom>[parent]</InheritFrom>
+                        </Schema>
+                    </Parser>
+                    <AttributeMap name="Input">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </AttributeMap>
+                    <AttributeMap name="Output">
+                        <InheritFrom>[parent]</InheritFrom>
+                        <AttributeMapItem>
+                            <Name>F_Name</Name>
+                            <Type>advanced</Type>
+                            <Enabled>true</Enabled>
+                            <Add>true</Add>
+                            <Modify>true</Modify>
+                            <Script>INVALID_RECORD_LIST[invalid_count]["F_Name"]</Script>
+                            <Simple>F_Name</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>L_Name</Name>
+                            <Type>advanced</Type>
+                            <Enabled>true</Enabled>
+                            <Add>true</Add>
+                            <Modify>true</Modify>
+                            <Script>INVALID_RECORD_LIST[invalid_count]["L_Name"];</Script>
+                            <Simple>L_Name</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>MISSING</Name>
+                            <Type>advanced</Type>
+                            <Script>INVALID_RECORD_LIST[invalid_count]["MISSING"]</Script>
+                            <Simple>MISSING</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>department</Name>
+                            <Type>advanced</Type>
+                            <Enabled>true</Enabled>
+                            <Add>true</Add>
+                            <Modify>true</Modify>
+                            <Script>INVALID_RECORD_LIST[invalid_count]["department"]</Script>
+                            <Simple>department</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>email_id</Name>
+                            <Type>advanced</Type>
+                            <Enabled>true</Enabled>
+                            <Add>true</Add>
+                            <Modify>true</Modify>
+                            <Script>INVALID_RECORD_LIST[invalid_count]["email_id"];</Script>
+                            <Simple>email_id</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>emp_id</Name>
+                            <Type>advanced</Type>
+                            <Enabled>true</Enabled>
+                            <Add>true</Add>
+                            <Modify>true</Modify>
+                            <Script>INVALID_RECORD_LIST[invalid_count]["emp_id"];</Script>
+                            <Simple>emp_id</Simple>
+                        </AttributeMapItem>
+                    </AttributeMap>
+                    <DeltaSettings/>
+                    <Schema name="Input">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                    <Schema name="Output">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                    <LinkCriteria>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </LinkCriteria>
+                    <Hooks>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Hooks>
+                    <CheckpointConfig/>
+                    <SandboxConfig/>
+                    <Reconnect>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <ReconnectRules/>
+                    </Reconnect>
+                    <Operations/>
+                    <PoolDefinition>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </PoolDefinition>
+                    <PoolInstance/>
+                </Connector>
+                <ScriptCondition><![CDATA[if(work.getStringValue("MISSING") != ""){
+	return true;
+}
+return false;]]></ScriptCondition>
+                <Conditions/>
+                <MatchAny>false</MatchAny>
+                <Enabled>true</Enabled>
+                <Type>0</Type>
+            </Branch>
+            <Connector name="Passive_Write_Records_CSV">
+                <InheritFrom>system:/Connectors/ibmdi.FileSystem</InheritFrom>
+                <ModTime>1559035016325</ModTime>
+                <ConnectorMode>AddOnly</ConnectorMode>
+                <ConnectorState>Passive</ConnectorState>
+                <Configuration>
+                    <InheritFrom>[parent]</InheritFrom>
+                    <parameter name="filePath"/>
+                </Configuration>
+                <Parser>
+                    <InheritFrom>system:/Parsers/ibmdi.CSV</InheritFrom>
+                    <parameter name="csvColumnSeparator">,</parameter>
+                    <parameter name="csvColumns">emp_id,F_Name,L_Name,department,email_id,MISSING</parameter>
+                    <Schema name="Input">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                    <Schema name="Output">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                </Parser>
+                <AttributeMap name="Input">
+                    <InheritFrom>[parent]</InheritFrom>
+                </AttributeMap>
+                <AttributeMap name="Output">
+                    <InheritFrom>[parent]</InheritFrom>
+                    <AttributeMapItem>
+                        <Name>F_Name</Name>
+                        <Type>simple</Type>
+                        <Simple>F_Name</Simple>
+                    </AttributeMapItem>
+                    <AttributeMapItem>
+                        <Name>L_Name</Name>
+                        <Type>simple</Type>
+                        <Simple>L_Name</Simple>
+                    </AttributeMapItem>
+                    <AttributeMapItem>
+                        <Name>MISSING</Name>
+                        <Type>simple</Type>
+                        <Simple>MISSING</Simple>
+                    </AttributeMapItem>
+                    <AttributeMapItem>
+                        <Name>department</Name>
+                        <Type>simple</Type>
+                        <Simple>department</Simple>
+                    </AttributeMapItem>
+                    <AttributeMapItem>
+                        <Name>email_id</Name>
+                        <Type>simple</Type>
+                        <Simple>email_id</Simple>
+                    </AttributeMapItem>
+                    <AttributeMapItem>
+                        <Name>emp_id</Name>
+                        <Type>simple</Type>
+                        <Simple>emp_id</Simple>
+                    </AttributeMapItem>
+                </AttributeMap>
+                <DeltaSettings/>
+                <Schema name="Input">
+                    <InheritFrom>[parent]</InheritFrom>
+                </Schema>
+                <Schema name="Output">
+                    <InheritFrom>[parent]</InheritFrom>
+                </Schema>
+                <LinkCriteria>
+                    <InheritFrom>[parent]</InheritFrom>
+                </LinkCriteria>
+                <Hooks>
+                    <InheritFrom>[parent]</InheritFrom>
+                </Hooks>
+                <CheckpointConfig/>
+                <SandboxConfig/>
+                <Reconnect>
+                    <InheritFrom>[parent]</InheritFrom>
+                    <ReconnectRules/>
+                </Reconnect>
+                <Operations/>
+                <PoolDefinition>
+                    <InheritFrom>[parent]</InheritFrom>
+                </PoolDefinition>
+                <PoolInstance/>
+                <InitializeOption>2</InitializeOption>
+            </Connector>
+        </ContainerDF>
+        <ThreadOptions/>
+        <Operations/>
+        <InitParams>
+            <Schema name="AssemblyLineInitParams"/>
+        </InitParams>
+    </AssemblyLine>
+</MetamergeConfig>
